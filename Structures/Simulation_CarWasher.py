@@ -3,9 +3,12 @@ import random
 
 class Washer:
     def __init__(self,ppm):
-        ...
+        self.carerateerate = ppm
+        self.currentTask = None
+        self.timeRemaining = 0
     def tisk(self):
-        ...
+        if self.currentTask == None:
+            self.timeRemaining = self.timeRemaining - 1
     def buzy(self):
         ...
     def startNext(self):
@@ -20,6 +23,6 @@ class Task:
         ...
 
     def simulation(numSeconds, carsPerMinute):
-        labprinter = Washer(carsPerMinute)
-        printQueue = Queue()
+        w = Washer(carsPerMinute)
+        washQueue = Queue()
         waitingtimes = []
