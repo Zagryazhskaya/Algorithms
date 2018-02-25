@@ -19,6 +19,8 @@ class Washer:
         self.timeRemaining = newtask.getCars() * 60 / self.carerateerate
 
 
+
+
 class Task:
     def __init__(self,task):
         ...
@@ -31,3 +33,19 @@ class Task:
         w = Washer(carsPerMinute)
         washQueue = Queue()
         waitingtimes = []
+
+        for currentSecond in range(numSeconds):
+
+            if newCar():
+                task = Task(currentSecond)
+                washQueue.enqueue(task)
+
+            if (not w.busy()) and (not washQueue.isEmpty()):
+                nexttask = washQueue.dequeue()
+                waitingtimes.append(nexttask.waitTime(currentSecond))
+                w.startNext(nexttask)
+
+            w.tick()
+
+        averageWait = sum(waitingtimes) / len(waitingtimes)
+        print("Average Wait %6.2f secs %3d tasks remaining." % (averageWait, washQueue.size()))
